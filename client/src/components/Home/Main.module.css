@@ -1,0 +1,17 @@
+.main {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.img {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#p {
+  width: fit-content;
+  position: absolute;
+  right: 540px;
+  top: 150px;
+}
