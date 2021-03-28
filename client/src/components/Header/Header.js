@@ -23,6 +23,16 @@ const Header = () => {
 
           <li className={style.li}>
             <Link
+              to="/create"
+              className={style.link}
+              style={{ textDecoration: "none" }}
+            >
+              Create
+            </Link>
+          </li>
+
+          <li className={style.li}>
+            <Link
               to="/offers"
               className={style.link}
               style={{ textDecoration: "none" }}
@@ -63,7 +73,7 @@ const Header = () => {
         {/* След като сме се логнали */}
         <div className={style.IsLogged}>
           <Link
-            to="/myprofile"
+            to="/my-profile"
             className={style.MyProfile}
             style={{ textDecoration: "none" }}
           >

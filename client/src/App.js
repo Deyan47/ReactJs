@@ -4,7 +4,14 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
+import Signup from "./components/SignUp/Signup";
+import Create from "./components/Create/Create";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Offers from "./components/Offers/Offers";
+import Profile from "./components/Profile/Profile";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
+import { AuthProvider } from "./contexts/AuthContext";
 
 import { Route, HashRouter, Switch } from "react-router-dom";
 //import NotFound from "./components/404/NotFound";
@@ -18,17 +25,25 @@ library.add(fab, faSearch);
 function App() {
   return (
     <HashRouter>
-      <div className={style.app}>
-        <Header />
-        <Switch>
-          <div className={style.container}>
-            <Route path="/" exact component={Home} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/register" exact component={Register} />
-          </div>
-        </Switch>
-        <Footer />
-      </div>
+      <AuthProvider>
+        <div className={style.app}>
+          <Header />
+          <Switch>
+            <div className={style.container}>
+              <Route path="/" exact component={Home} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/forgot-password" component={ForgotPassword} />
+              <Route path="/my-profile" component={Profile} />
+              <Route path="/update-profile" component={UpdateProfile} />
+              <Route path="/offers" component={Offers} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Signup} />
+              <Route path="/create" component={Create} />
+            </div>
+          </Switch>
+          <Footer />
+        </div>
+      </AuthProvider>
     </HashRouter>
   );
 
