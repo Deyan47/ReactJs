@@ -4,7 +4,7 @@ import style from "./Main.module.css";
 const Main = () => {
   return (
     <main className={style.main}>
-      <img src="/bgr.png" className={style.img}></img>
+      <img src="/bgr.png" className={style.img} alt="homeImage"></img>
       <h1 id={style.p}>What are you looking for?</h1>
 
       <i class="fa fa-search"></i>

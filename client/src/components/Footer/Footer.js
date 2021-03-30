@@ -1,5 +1,5 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { Link } from "react-router-dom";
 import style from "./Footer.module.css";
 const Footer = () => {
@@ -16,10 +16,9 @@ const Footer = () => {
       <p className={style.copyright}>
         Copyright © 2021 Deyan Yonkov. All rights reserved.
       </p>
-      <div>
-        Your <FontAwesomeIcon icon="search" /> is hot and ready!
-      </div>
+      <div></div>
     </footer>
   );
 };
 export default Footer;
+//Your <FontAwesomeIcon icon="search" /> is hot and ready!

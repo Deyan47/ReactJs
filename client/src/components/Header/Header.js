@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header className={style.header}>
-      <img className={style.image} src="/logo.png" />
+      <img className={style.image} src="/logo.png" alt="JobHunterLogo" />
 
       <h1 className={style.h1}>Job Hunter</h1>
       <p className={style.p}>Get your dream job</p>
@@ -77,17 +77,8 @@ const Header = () => {
             className={style.MyProfile}
             style={{ textDecoration: "none" }}
           >
-            <img id={style.user_img} src="/user_logo.png" />
+            <img id={style.user_img} src="/user_logo.png" alt="userLogo" />
             <p id={style.MyProfile}>My Profile</p>
-          </Link>
-
-          <Link
-            to="/logout"
-            className={style.btn}
-            id={style.logout}
-            style={{ textDecoration: "none" }}
-          >
-            Logout
           </Link>
         </div>
       </div>

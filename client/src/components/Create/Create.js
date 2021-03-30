@@ -1,69 +1,173 @@
 import React, { useState } from "react";
+import { Button, Form, Col, Alert } from "react-bootstrap";
 import { db } from "../../firebase/firebase";
+import { useHistory } from "react-router-dom";
 
 const CreateOffer = () => {
-  const [name, setName] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  const [workPosition, setWorkPosition] = useState("");
+  const [salary, setSalary] = useState("");
+  const [workingHours, setWorkingHours] = useState("");
+  const [city, setCity] = useState("");
+  const [reqSkills, setReqSkills] = useState("");
 
-  const [loader, setLoader] = useState(false);
+  const [error, setError] = useState("");
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoader(true);
+    setLoading(true);
 
     db.collection("offers")
       .add({
-        name: name,
+        companyName: companyName,
         description: description,
         image: image,
+        workPosition: workPosition,
+        salary: salary,
+        workingHours: workingHours,
+        city: city,
+        reqSkills: reqSkills,
       })
       .then(() => {
-        alert("Created!");
-        setLoader(false);
+        setLoading(false);
+        history.push("/");
       })
       .catch((err) => {
-        console.log(err);
-        setLoader(false);
+        setError(err);
+        setLoading(false);
       });
 
-    setName("");
+    setCompanyName("");
     setDescription("");
     setImage("");
+    setWorkPosition("");
+    setSalary("");
+    setWorkingHours("");
+    setCity("");
+    setReqSkills("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Create New Offer</h1>
+    //<form onSubmit={handleSubmit}>
+    //  <h1>Create New Offer</h1>
 
-      <label>Company Name</label>
-      <input
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+    //  <label>Company companyName</label>
+    //  <input
+    //    placeholder="companyName"
+    //    value={companyName}
+    //    onChange={(e) => setCompanyName(e.target.value)}
+    //  />
 
-      <label>Description</label>
-      <input
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
+    //  <label>Description</label>
+    //  <input
+    //    placeholder="Description"
+    //    value={description}
+    //    onChange={(e) => setDescription(e.target.value)}
+    //  />
 
-      <label>Image</label>
-      <textarea
-        placeholder="Image"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-      ></textarea>
+    //  <label>Image</label>
+    //  <textarea
+    //    placeholder="Image"
+    //    value={image}
+    //    onChange={(e) => setImage(e.target.value)}
+    //  ></textarea>
 
-      <button
-        type="submit"
-        style={{ background: loader ? "#ccc" : "rgb(2,2,110" }}
-      >
-        Create
-      </button>
-    </form>
+    //  <button
+    //    type="submit"
+    //    style={{ background: loading ? "#ccc" : "rgb(2,2,110" }}
+    //  >
+    //    Create
+    //  </button>
+    //</form>
+
+    <Form onSubmit={handleSubmit}>
+      {error && <Alert variant="danger">{error}</Alert>}
+      <Form.Row>
+        <Form.Group as={Col} controlId="formGridEmail">
+          <Form.Label>Company Name</Form.Label>
+          <Form.Control
+            type="text"
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label>Work Position</Form.Label>
+          <Form.Control
+            type="text"
+            value={workPosition}
+            onChange={(e) => setWorkPosition(e.target.value)}
+          />
+        </Form.Group>
+      </Form.Row>
+
+      <Form.Group controlId="formGridAddress1">
+        <Form.Label>Description About the Job</Form.Label>
+        <Form.Control
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Row>
+        <Form.Group as={Col} controlId="formGridCity">
+          <Form.Label>City</Form.Label>
+          <Form.Control
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridCity">
+          <Form.Label>Working Hours Per Day</Form.Label>
+          <Form.Control
+            type="text"
+            value={workingHours}
+            onChange={(e) => setWorkingHours(e.target.value)}
+          />
+        </Form.Group>
+      </Form.Row>
+
+      <Form.Row>
+        <Form.Group as={Col} controlId="formGridCity">
+          <Form.Label>Required Skills</Form.Label>
+          <Form.Control
+            type="text"
+            value={reqSkills}
+            onChange={(e) => setReqSkills(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridCity">
+          <Form.Label>Salary</Form.Label>
+          <Form.Control
+            type="text"
+            value={salary}
+            onChange={(e) => setSalary(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridZip">
+          <Form.Label>Image Adress</Form.Label>
+          <Form.Control
+            type="text"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </Form.Group>
+      </Form.Row>
+
+      <Button disabled={loading} className="w-100" type="submit">
+        Create Offer!
+      </Button>
+    </Form>
   );
 };
 
