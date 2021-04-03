@@ -13,16 +13,31 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
+  function saveUserData(data) {
+    const {
+      user: { email, uid },
+    } = data;
+    localStorage.setItem("user", JSON.stringify({ email, uid }));
+  }
+
+  function getUserData() {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
+  }
+
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return auth.signInWithEmailAndPassword(email, password).then((userData) => {
+      saveUserData(userData);
+    });
   }
 
   function logout() {
     return auth.signOut().then(() => {
+      localStorage.removeItem("user");
       history.push("/");
     });
   }

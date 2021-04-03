@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, ListGroupItem, ListGroup, Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { db } from "../../firebase/firebase";
 import { Link } from "react-router-dom";
 
@@ -35,7 +35,7 @@ const Offers = () => {
           <Card.Body>
             <Card.Title>{offer.name}</Card.Title>
             <Card.Text>{offer.description}</Card.Text>
-            <Link to="/">
+            <Link to="/offers/details/:offerId">
               <Button variant="primary">Learn More...</Button>
             </Link>
           </Card.Body>

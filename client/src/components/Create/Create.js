@@ -17,6 +17,16 @@ const CreateOffer = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
 
+  const onDescriptionChangeHandler = (e) => {
+    console.log(e.target.value);
+
+    if (e.target.value.length < 10) {
+      setError("Description too short");
+    } else {
+      setError("");
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -52,38 +62,6 @@ const CreateOffer = () => {
   };
 
   return (
-    //<form onSubmit={handleSubmit}>
-    //  <h1>Create New Offer</h1>
-
-    //  <label>Company companyName</label>
-    //  <input
-    //    placeholder="companyName"
-    //    value={companyName}
-    //    onChange={(e) => setCompanyName(e.target.value)}
-    //  />
-
-    //  <label>Description</label>
-    //  <input
-    //    placeholder="Description"
-    //    value={description}
-    //    onChange={(e) => setDescription(e.target.value)}
-    //  />
-
-    //  <label>Image</label>
-    //  <textarea
-    //    placeholder="Image"
-    //    value={image}
-    //    onChange={(e) => setImage(e.target.value)}
-    //  ></textarea>
-
-    //  <button
-    //    type="submit"
-    //    style={{ background: loading ? "#ccc" : "rgb(2,2,110" }}
-    //  >
-    //    Create
-    //  </button>
-    //</form>
-
     <Form onSubmit={handleSubmit}>
       {error && <Alert variant="danger">{error}</Alert>}
       <Form.Row>
@@ -112,6 +90,7 @@ const CreateOffer = () => {
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          onBlur={onDescriptionChangeHandler}
         />
       </Form.Group>
 

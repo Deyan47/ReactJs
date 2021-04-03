@@ -11,6 +11,8 @@ import Offers from "./components/Offers/Offers";
 import Profile from "./components/Profile/Profile";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
+import offerDetails from "./components/OfferDetails/OfferDetails";
+import "./firebase/firebase";
 import { AuthProvider } from "./contexts/AuthContext";
 
 import { Route, HashRouter, Switch } from "react-router-dom";
@@ -36,6 +38,11 @@ function App() {
               <Route path="/my-profile" component={Profile} />
               <Route path="/update-profile" component={UpdateProfile} />
               <Route path="/offers" component={Offers} />
+              <Route
+                path="/offers/details/:offerId"
+                exact
+                component={offerDetails}
+              />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Signup} />
               <Route path="/create" component={Create} />
