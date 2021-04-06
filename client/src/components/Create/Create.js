@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Button, Form, Col, Alert } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Col,
+  Alert,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
+import style from "./Create.module.css";
 import { db } from "../../firebase/firebase";
 import { useHistory } from "react-router-dom";
 
@@ -84,15 +92,19 @@ const CreateOffer = () => {
         </Form.Group>
       </Form.Row>
 
-      <Form.Group controlId="formGridAddress1">
-        <Form.Label>Description About the Job</Form.Label>
-        <Form.Control
-          type="text"
+      <InputGroup size="lg">
+        <InputGroup.Prepend>
+          <InputGroup.Text>Description About the Job</InputGroup.Text>
+        </InputGroup.Prepend>
+        <FormControl
+          className={style.description}
+          as="textarea"
+          aria-label="With textarea"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           onBlur={onDescriptionChangeHandler}
         />
-      </Form.Group>
+      </InputGroup>
 
       <Form.Row>
         <Form.Group as={Col} controlId="formGridCity">
@@ -125,7 +137,7 @@ const CreateOffer = () => {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridCity">
-          <Form.Label>Salary</Form.Label>
+          <Form.Label>Salary(BGN)</Form.Label>
           <Form.Control
             type="text"
             value={salary}

@@ -33,9 +33,9 @@ const Offers = () => {
         <Card style={{ width: "18rem" }} key={offer.id}>
           <Card.Img variant="top" src={offer.image} />
           <Card.Body>
-            <Card.Title>{offer.name}</Card.Title>
+            <Card.Title>{offer.companyName}</Card.Title>
             <Card.Text>{offer.description}</Card.Text>
-            <Link to="/offers/details/:offerId">
+            <Link to={`/offers/details/${offer.id}`}>
               <Button variant="primary">Learn More...</Button>
             </Link>
           </Card.Body>

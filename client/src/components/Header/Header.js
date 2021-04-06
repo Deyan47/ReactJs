@@ -2,13 +2,16 @@ import style from "./Header.module.css";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  // function getUserData() {
+  //   const user = localStorage.getItem("user");
+  //   return user ? JSON.parse(user) : null;
+  // }
+
   return (
     <header className={style.header}>
       <img className={style.image} src="/logo.png" alt="JobHunterLogo" />
-
       <h1 className={style.h1}>Job Hunter</h1>
       <p className={style.p}>Get your dream job</p>
-
       <nav className={style.nav}>
         <ul className={style.ul}>
           <li className={style.li}>
@@ -52,7 +55,6 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-
       <div className={style.btnContainer}>
         <Link
           to="/login"

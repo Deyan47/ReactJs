@@ -20,11 +20,6 @@ export function AuthProvider({ children }) {
     localStorage.setItem("user", JSON.stringify({ email, uid }));
   }
 
-  function getUserData() {
-    const user = localStorage.getItem("user");
-    return user ? JSON.parse(user) : null;
-  }
-
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
