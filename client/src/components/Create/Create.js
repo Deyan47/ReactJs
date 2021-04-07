@@ -79,6 +79,7 @@ const CreateOffer = () => {
             type="text"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
+            required
           />
         </Form.Group>
 
@@ -88,6 +89,7 @@ const CreateOffer = () => {
             type="text"
             value={workPosition}
             onChange={(e) => setWorkPosition(e.target.value)}
+            required
           />
         </Form.Group>
       </Form.Row>
@@ -103,6 +105,7 @@ const CreateOffer = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           onBlur={onDescriptionChangeHandler}
+          required
         />
       </InputGroup>
 
@@ -113,6 +116,7 @@ const CreateOffer = () => {
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
+            required
           />
         </Form.Group>
 
@@ -122,6 +126,7 @@ const CreateOffer = () => {
             type="text"
             value={workingHours}
             onChange={(e) => setWorkingHours(e.target.value)}
+            required
           />
         </Form.Group>
       </Form.Row>
@@ -133,6 +138,7 @@ const CreateOffer = () => {
             type="text"
             value={reqSkills}
             onChange={(e) => setReqSkills(e.target.value)}
+            required
           />
         </Form.Group>
 
@@ -142,6 +148,7 @@ const CreateOffer = () => {
             type="text"
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
+            required
           />
         </Form.Group>
 
@@ -151,6 +158,7 @@ const CreateOffer = () => {
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
+            required
           />
         </Form.Group>
       </Form.Row>

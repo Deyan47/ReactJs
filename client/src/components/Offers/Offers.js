@@ -36,7 +36,7 @@ const Offers = () => {
             <Card.Title>{offer.companyName}</Card.Title>
             <Card.Text>{offer.description}</Card.Text>
             <Link to={`/offers/details/${offer.id}`}>
-              <Button variant="primary">Learn More...</Button>
+              <Button variant="primary">Learn More..</Button>
             </Link>
           </Card.Body>
         </Card>
