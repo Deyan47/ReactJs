@@ -3,14 +3,12 @@ import { Button, Form, Col, InputGroup, FormControl } from "react-bootstrap";
 import { db } from "../../firebase/firebase";
 import { useHistory, Link } from "react-router-dom";
 import style from "./Offer.module.css";
-import { useAuth } from "../../contexts/AuthContext";
 
-const OfferDetails = (props) => {
+const EditOffer = (props) => {
   const offerId = props.match.params.offerId;
   const [offer, setOffer] = useState([]);
   const [error, setError] = useState("");
   const history = useHistory();
-  const { getUserData } = useAuth();
 
   const deleteOffer = async () => {
     db.collection("offers")
@@ -21,51 +19,25 @@ const OfferDetails = (props) => {
       });
   };
 
-  //useEffect(() => {
-  //  db.collection("offers")
-  //    .doc(offerId)
-  //    .get()
-  //    .then((response) => {
-  //      const fetchedOffers = []
-  //      const fetchedOffer = {
-  //        id: response.id,
-  //        ...response.data(),
-  //      };
-  //      fetchedOffers.push(fetchedOffer)
-  //      setOffer(fetchedOffers);
-  //    })
-  //    .catch((error) => {
-  //      setError(error);
-  //    });
-  //}, []);
-
   useEffect(() => {
     db.collection("offers")
       .doc(offerId)
       .get()
-      .then((res) => {
-        const actualOfferData = res.data();
-        const userIndex = actualOfferData.clients.indexOf(getUserData().uid);
-        const imInTheClientsList = userIndex > -1;
-        const imTheSalesman = actualOfferData.salesman === getUserData().uid;
+      .then((response) => {
         const fetchedOffers = [];
+
         const fetchedOffer = {
-          imTheSalesman,
-          imInTheClientsList,
-          id: res.id,
-          ...res.data(),
+          id: response.id,
+          ...response.data(),
         };
         fetchedOffers.push(fetchedOffer);
+
         setOffer(fetchedOffers);
       })
       .catch((error) => {
         setError(error);
       });
   }, []);
-
-  //function handleUser() {
-  //  return Boolean(getUserData().uid === offer.salesman);
-  //}
 
   return (
     <>
@@ -133,39 +105,35 @@ const OfferDetails = (props) => {
             </Form.Group>
           </Form.Row>
 
-          {input.imTheSalesman === true ? (
-            <>
-              <Link>
-                <Button
-                  className={`w-30 ${style.button}`}
-                  type="submit"
-                  onClick={deleteOffer}
-                >
-                  Delete
-                </Button>
-              </Link>
+          <Link>
+            <Button className={`w-30 ${style.button}`} type="submit">
+              Apply for the job
+            </Button>
+          </Link>
 
-              <Link>
-                <Button
-                  className={`w-30 ${style.button}`}
-                  type="submit"
-                  onClick={deleteOffer}
-                >
-                  Edit
-                </Button>
-              </Link>
-            </>
-          ) : (
-            <Link>
-              <Button className={`w-30 ${style.button}`} type="submit">
-                Apply for the job
-              </Button>
-            </Link>
-          )}
+          <Link>
+            <Button
+              className={`w-30 ${style.button}`}
+              type="submit"
+              onClick={deleteOffer}
+            >
+              Delete
+            </Button>
+          </Link>
+
+          <Link>
+            <Button
+              className={`w-30 ${style.button}`}
+              type="submit"
+              onClick={deleteOffer}
+            >
+              Edit
+            </Button>
+          </Link>
         </Form>
       ))}
     </>
   );
 };
 
-export default OfferDetails;
+export default EditOffer;

@@ -10,6 +10,7 @@ import {
 import style from "./Create.module.css";
 import { db } from "../../firebase/firebase";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const CreateOffer = () => {
   const [companyName, setCompanyName] = useState("");
@@ -20,6 +21,7 @@ const CreateOffer = () => {
   const [workingHours, setWorkingHours] = useState("");
   const [city, setCity] = useState("");
   const [reqSkills, setReqSkills] = useState("");
+  const { getUserData } = useAuth();
 
   const [error, setError] = useState("");
   const history = useHistory();
@@ -49,6 +51,8 @@ const CreateOffer = () => {
         workingHours: workingHours,
         city: city,
         reqSkills: reqSkills,
+        salesman: getUserData().uid,
+        clients: [],
       })
       .then(() => {
         setLoading(false);
@@ -72,8 +76,8 @@ const CreateOffer = () => {
   return (
     <Form onSubmit={handleSubmit}>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Form.Row>
-        <Form.Group as={Col} controlId="formGridEmail">
+      <Form.Row className={style.row}>
+        <Form.Group as={Col} controlId="formGridCity">
           <Form.Label>Company Name</Form.Label>
           <Form.Control
             type="text"
@@ -83,7 +87,7 @@ const CreateOffer = () => {
           />
         </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridPassword">
+        <Form.Group as={Col} controlId="formGridCity">
           <Form.Label>Work Position</Form.Label>
           <Form.Control
             type="text"
@@ -109,7 +113,7 @@ const CreateOffer = () => {
         />
       </InputGroup>
 
-      <Form.Row>
+      <Form.Row className={style.row}>
         <Form.Group as={Col} controlId="formGridCity">
           <Form.Label>City</Form.Label>
           <Form.Control
@@ -131,7 +135,7 @@ const CreateOffer = () => {
         </Form.Group>
       </Form.Row>
 
-      <Form.Row>
+      <Form.Row className={style.row}>
         <Form.Group as={Col} controlId="formGridCity">
           <Form.Label>Required Skills</Form.Label>
           <Form.Control

@@ -2,3 +2,6 @@
   height: 150px;
   resize: none;
 }
+.row {
+  margin-right: 0 !important;
+}
