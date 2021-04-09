@@ -24,16 +24,19 @@ const Header = () => {
                   Home
                 </Link>
               </li>
-
-              <li className={style.li}>
-                <Link
-                  to="/create"
-                  className={style.link}
-                  style={{ textDecoration: "none" }}
-                >
-                  Create
-                </Link>
-              </li>
+              {getUserData().uid === "gYt1IBKURQY1Vo1gbjPuy3jWAv43" ? (
+                <li className={style.li}>
+                  <Link
+                    to="/create"
+                    className={style.link}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Create
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
 
               <li className={style.li}>
                 <Link
@@ -44,16 +47,19 @@ const Header = () => {
                   Offers
                 </Link>
               </li>
-
-              <li className={style.li}>
-                <Link
-                  to="/dashboard"
-                  className={style.link}
-                  style={{ textDecoration: "none" }}
-                >
-                  Dashboard
-                </Link>
-              </li>
+              {getUserData().uid !== "gYt1IBKURQY1Vo1gbjPuy3jWAv43" ? (
+                <li className={style.li}>
+                  <Link
+                    to="/dashboard"
+                    className={style.link}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
 
               <div className={style.IsLogged}>
                 <Link
@@ -93,8 +99,6 @@ const Header = () => {
           )}
         </ul>
       </nav>
-
-      {/* След като сме се логнали */}
     </header>
   );
 };

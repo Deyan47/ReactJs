@@ -9,35 +9,9 @@ const OfferDetails = (props) => {
   const offerId = props.match.params.offerId;
   const [offer, setOffer] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   const { getUserData } = useAuth();
-
-  const deleteOffer = async () => {
-    db.collection("offers")
-      .doc(offerId)
-      .delete()
-      .then(() => {
-        history.push("/");
-      });
-  };
-
-  //useEffect(() => {
-  //  db.collection("offers")
-  //    .doc(offerId)
-  //    .get()
-  //    .then((response) => {
-  //      const fetchedOffers = []
-  //      const fetchedOffer = {
-  //        id: response.id,
-  //        ...response.data(),
-  //      };
-  //      fetchedOffers.push(fetchedOffer)
-  //      setOffer(fetchedOffers);
-  //    })
-  //    .catch((error) => {
-  //      setError(error);
-  //    });
-  //}, []);
 
   useEffect(() => {
     db.collection("offers")
@@ -63,9 +37,28 @@ const OfferDetails = (props) => {
       });
   }, []);
 
-  //function handleUser() {
-  //  return Boolean(getUserData().uid === offer.salesman);
-  //}
+  const saveOffer = async () => {
+    db.collection("saved")
+      .add(...offer)
+      .then(() => {
+        history.push("/dashboard");
+      })
+      .catch(() => {
+        setError(error);
+      });
+  };
+
+  const deleteOffer = async () => {
+    db.collection("offers")
+      .doc(offerId)
+      .delete()
+      .then(() => {
+        history.push("/offers");
+      })
+      .catch(() => {
+        setError(error);
+      });
+  };
 
   return (
     <>
@@ -145,20 +138,20 @@ const OfferDetails = (props) => {
                 </Button>
               </Link>
 
-              <Link>
-                <Button
-                  className={`w-30 ${style.button}`}
-                  type="submit"
-                  onClick={deleteOffer}
-                >
+              <Link to={`/offers/edit/${offerId}`}>
+                <Button className={`w-30 ${style.button}`} type="submit">
                   Edit
                 </Button>
               </Link>
             </>
           ) : (
             <Link>
-              <Button className={`w-30 ${style.button}`} type="submit">
-                Apply for the job
+              <Button
+                className={`w-30 ${style.button}`}
+                type="submit"
+                onClick={saveOffer}
+              >
+                Save this offer in dashboard
               </Button>
             </Link>
           )}

@@ -1,0 +1,11 @@
+.description {
+  height: 150px;
+  resize: none;
+}
+.row {
+  margin-right: 0 !important;
+}
+.button {
+  margin-right: 5px;
+  margin-left: 5px;
+}

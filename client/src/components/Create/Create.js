@@ -28,14 +28,29 @@ const CreateOffer = () => {
   const [loading, setLoading] = useState(false);
 
   const onDescriptionChangeHandler = (e) => {
-    console.log(e.target.value);
-
     if (e.target.value.length < 10) {
-      setError("Description too short");
+      setError("Description must be at least 10 symbols");
     } else {
       setError("");
     }
   };
+
+  const onNameChangeHandler = (e) => {
+    if (e.target.value.length < 4) {
+      setError("Company name must be at least 4 symbols");
+    } else {
+      setError("");
+    }
+  };
+
+  //const onImageHandler = (e) => {
+  //  if (e.target.value. !== (/https?:\/\/.*\.(?:png|jpg/).test) {
+  //
+  //    setError("");
+  //  } else {
+  //    setError("");
+  //  }
+  //};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +71,7 @@ const CreateOffer = () => {
       })
       .then(() => {
         setLoading(false);
-        history.push("/");
+        history.push("/offers");
       })
       .catch((err) => {
         setError(err);

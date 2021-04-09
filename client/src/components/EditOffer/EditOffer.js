@@ -2,36 +2,26 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, Col, InputGroup, FormControl } from "react-bootstrap";
 import { db } from "../../firebase/firebase";
 import { useHistory, Link } from "react-router-dom";
-import style from "./Offer.module.css";
+import style from "./Edit.module.css";
 
 const EditOffer = (props) => {
   const offerId = props.match.params.offerId;
+
   const [offer, setOffer] = useState([]);
   const [error, setError] = useState("");
   const history = useHistory();
-
-  const deleteOffer = async () => {
-    db.collection("offers")
-      .doc(offerId)
-      .delete()
-      .then(() => {
-        history.push("/");
-      });
-  };
 
   useEffect(() => {
     db.collection("offers")
       .doc(offerId)
       .get()
-      .then((response) => {
+      .then((res) => {
         const fetchedOffers = [];
-
         const fetchedOffer = {
-          id: response.id,
-          ...response.data(),
+          id: res.id,
+          ...res.data(),
         };
         fetchedOffers.push(fetchedOffer);
-
         setOffer(fetchedOffers);
       })
       .catch((error) => {
@@ -39,27 +29,35 @@ const EditOffer = (props) => {
       });
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    db.collection("offers")
+      .doc(offerId)
+      .set({
+        ...offer,
+      })
+      .then(() => {
+        history.push("/");
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  };
+
   return (
     <>
       {offer.map((input) => (
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Row className={style.row}>
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Company Name</Form.Label>
-              <Form.Control
-                type="text"
-                value={input.companyName}
-                disabled="true"
-              />
+              <Form.Control type="text" defaultValue={input.companyName} />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridPassword">
               <Form.Label>Work Position</Form.Label>
-              <Form.Control
-                type="text"
-                value={input.workPosition}
-                disabled="true"
-              />
+              <Form.Control type="text" value={input.workPosition} />
             </Form.Group>
           </Form.Row>
           <InputGroup>
@@ -71,63 +69,34 @@ const EditOffer = (props) => {
               as="textarea"
               aria-label="With textarea"
               value={input.description}
-              disabled="true"
             />
           </InputGroup>
           <Form.Row className={style.row}>
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>City</Form.Label>
-              <Form.Control type="text" value={input.city} disabled="true" />
+              <Form.Control type="text" value={input.city} />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Working Hours Per Day</Form.Label>
-              <Form.Control
-                type="text"
-                value={input.workingHours}
-                disabled="true"
-              />
+              <Form.Control type="text" value={input.workingHours} />
             </Form.Group>
           </Form.Row>
           <Form.Row className={style.row}>
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Required Skills</Form.Label>
-              <Form.Control
-                type="text"
-                value={input.reqSkills}
-                disabled="true"
-              />
+              <Form.Control type="text" value={input.reqSkills} />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Salary(BGN)</Form.Label>
-              <Form.Control type="text" value={input.salary} disabled="true" />
+              <Form.Control type="text" value={input.salary} />
             </Form.Group>
           </Form.Row>
 
           <Link>
             <Button className={`w-30 ${style.button}`} type="submit">
-              Apply for the job
-            </Button>
-          </Link>
-
-          <Link>
-            <Button
-              className={`w-30 ${style.button}`}
-              type="submit"
-              onClick={deleteOffer}
-            >
-              Delete
-            </Button>
-          </Link>
-
-          <Link>
-            <Button
-              className={`w-30 ${style.button}`}
-              type="submit"
-              onClick={deleteOffer}
-            >
-              Edit
+              Save
             </Button>
           </Link>
         </Form>

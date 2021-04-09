@@ -10,13 +10,9 @@ export default function Signup() {
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
-  const [currentOption, setCurrentOption] = useState("user");
+
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-
-  const changeOption = (newOption) => {
-    setCurrentOption(newOption);
-  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -56,16 +52,7 @@ export default function Signup() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
-            <label>Tell us what you are:</label>
-            <br />
-            <select
-              onChange={(event) => changeOption(event.target.value)}
-              value={currentOption}
-              className={style.select}
-            >
-              <option value="user">User</option>
-              <option value="company">Company</option>
-            </select>
+
             <Button disabled={loading} className="w-100" type="submit">
               Sign Up
             </Button>
