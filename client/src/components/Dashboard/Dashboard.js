@@ -27,6 +27,10 @@ const Dashboard = () => {
       });
   }, []);
 
+  if (Object.keys(offers).length < 1) {
+    return <h1>No Saved Offers</h1>;
+  }
+
   return (
     <div className={`row ${style.styleRow}`}>
       {error ? <p>Ops, there is an error :(</p> : null}

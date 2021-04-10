@@ -29,28 +29,90 @@ const CreateOffer = () => {
 
   const onDescriptionChangeHandler = (e) => {
     if (e.target.value.length < 10) {
-      setError("Description must be at least 10 symbols");
+      setError("Description must be at least 10 symbols.");
+    } else {
+      setError("");
+    }
+  };
+
+  const onReqSkillsChangeHandler = (e) => {
+    if (e.target.value.length < 4) {
+      setError("Required skills must be at least 4 symbols.");
+    } else {
+      setError("");
+    }
+  };
+
+  const onWorkPositionChangeHandler = (e) => {
+    const regEx = /^\D+$/g;
+    if (e.target.value.length < 4) {
+      setError("Work position must be at least 4 symbols.");
+    } else if (e.target.value.length > 15) {
+      setError("Work position max length allowed is 15 symbols.");
+    } else if (!e.target.value.match(regEx)) {
+      setError("Work position must include letters only.");
     } else {
       setError("");
     }
   };
 
   const onNameChangeHandler = (e) => {
-    if (e.target.value.length < 4) {
-      setError("Company name must be at least 4 symbols");
+    if (e.target.value.length < 3) {
+      setError("Company name must be at least 3 symbols.");
+    } else if (e.target.value.length > 20) {
+      setError("Company name max length allowed is 20 symbols.");
     } else {
       setError("");
     }
   };
 
-  //const onImageHandler = (e) => {
-  //  if (e.target.value. !== (/https?:\/\/.*\.(?:png|jpg/).test) {
-  //
-  //    setError("");
-  //  } else {
-  //    setError("");
-  //  }
-  //};
+  const onCityChangeHandler = (e) => {
+    const regEx = /^\D+$/g;
+    if (e.target.value.length < 4) {
+      setError("City must be at least 3 symbols.");
+    } else if (e.target.value.length > 15) {
+      setError("City max length allowed is 15 symbols.");
+    } else if (!e.target.value.match(regEx)) {
+      setError("City must include letters only.");
+    } else {
+      setError("");
+    }
+  };
+
+  const onHoursChangeHandler = (e) => {
+    const regEx = /^\d+$/g;
+    if (e.target.value.length < 1) {
+      setError("Working hours must be at least 1 symbols.");
+    } else if (e.target.value.length > 3) {
+      setError("Working hours max length allowed is 3 symbols.");
+    } else if (!e.target.value.match(regEx)) {
+      setError("Working hours must include digits only.");
+    } else {
+      setError("");
+    }
+  };
+
+  const onSalaryChangeHandler = (e) => {
+    const regEx = /^\d+$/g;
+    if (e.target.value.length < 3) {
+      setError("Salary must be at least 3 symbols.");
+    } else if (e.target.value.length > 15) {
+      setError("Salary max length allowed is 15 symbols.");
+    } else if (!e.target.value.match(regEx)) {
+      setError("Salary must include digits only.");
+    } else {
+      setError("");
+    }
+  };
+
+  const onImageHandler = (e) => {
+    const regEx = /^(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))$/g;
+    if (!e.target.value.match(regEx)) {
+      setError("Not a valid image address.");
+    } else {
+      setError("");
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -98,7 +160,8 @@ const CreateOffer = () => {
             type="text"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
-            required
+            onBlur={onNameChangeHandler}
+            required="true"
           />
         </Form.Group>
 
@@ -108,7 +171,8 @@ const CreateOffer = () => {
             type="text"
             value={workPosition}
             onChange={(e) => setWorkPosition(e.target.value)}
-            required
+            onBlur={onWorkPositionChangeHandler}
+            required="true"
           />
         </Form.Group>
       </Form.Row>
@@ -124,7 +188,7 @@ const CreateOffer = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           onBlur={onDescriptionChangeHandler}
-          required
+          required="true"
         />
       </InputGroup>
 
@@ -135,7 +199,8 @@ const CreateOffer = () => {
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            required
+            required="true"
+            onBlur={onCityChangeHandler}
           />
         </Form.Group>
 
@@ -145,7 +210,8 @@ const CreateOffer = () => {
             type="text"
             value={workingHours}
             onChange={(e) => setWorkingHours(e.target.value)}
-            required
+            onBlur={onHoursChangeHandler}
+            required="true"
           />
         </Form.Group>
       </Form.Row>
@@ -157,7 +223,8 @@ const CreateOffer = () => {
             type="text"
             value={reqSkills}
             onChange={(e) => setReqSkills(e.target.value)}
-            required
+            onBlur={onReqSkillsChangeHandler}
+            required="true"
           />
         </Form.Group>
 
@@ -167,7 +234,8 @@ const CreateOffer = () => {
             type="text"
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
-            required
+            onBlur={onSalaryChangeHandler}
+            required="true"
           />
         </Form.Group>
 
@@ -177,7 +245,8 @@ const CreateOffer = () => {
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
-            required
+            onBlur={onImageHandler}
+            required="true"
           />
         </Form.Group>
       </Form.Row>

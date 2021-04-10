@@ -127,23 +127,15 @@ const OfferDetails = (props) => {
           </Form.Row>
 
           {input.imTheSalesman === true ? (
-            <>
-              <Link>
-                <Button
-                  className={`w-30 ${style.button}`}
-                  type="submit"
-                  onClick={deleteOffer}
-                >
-                  Delete
-                </Button>
-              </Link>
-
-              <Link to={`/offers/edit/${offerId}`}>
-                <Button className={`w-30 ${style.button}`} type="submit">
-                  Edit
-                </Button>
-              </Link>
-            </>
+            <Link>
+              <Button
+                className={`w-30 ${style.button}`}
+                type="submit"
+                onClick={deleteOffer}
+              >
+                Delete
+              </Button>
+            </Link>
           ) : (
             <Link>
               <Button

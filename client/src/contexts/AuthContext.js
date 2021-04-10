@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { db, auth } from "../firebase/firebase";
+import { auth } from "../firebase/firebase";
 import { useHistory } from "react-router-dom";
 
 const AuthContext = React.createContext();
@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
     const {
       user: { email, uid },
     } = data;
-    localStorage.setItem("user", JSON.stringify({ email, uid }));
+    return localStorage.setItem("user", JSON.stringify({ email, uid }));
   }
 
   function getUserData() {
@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
 
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password).then((userData) => {
-      saveUserData(userData);
+      return saveUserData(userData);
     });
   }
 

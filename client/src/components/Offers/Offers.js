@@ -27,6 +27,10 @@ const Offers = () => {
       });
   }, []);
 
+  if (offers.length < 1) {
+    return <h1>No Offers for now.</h1>;
+  }
+
   return (
     <div className={`row ${style.styleRow}`}>
       {error ? <p>Ops, there is an error :(</p> : null}

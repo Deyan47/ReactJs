@@ -14,11 +14,29 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
+  const regEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
+  const onEmailChange = (e) => {
+    if (!emailRef.current.value.match(regEx)) {
+      setError("Not a valid email.");
+    } else {
+      setError("");
+    }
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+      setError("Passwords does not match");
+    } else {
+      setError("");
+    }
+
+    if (passwordRef.current.value.length < 6) {
+      setError("Password min length is 6 symbols");
+    } else {
+      setError("");
     }
 
     try {
@@ -42,7 +60,12 @@ export default function Signup() {
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control
+                type="email"
+                ref={emailRef}
+                required
+                onBlur={onEmailChange}
+              />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
