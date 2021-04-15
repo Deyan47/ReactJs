@@ -15,11 +15,12 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      setError("");
       setLoading(true);
+      setError("");
       await login(emailRef.current.value, passwordRef.current.value).then(
         () => {
           history.push("/");
+          window.location.reload(false);
         }
       );
     } catch {

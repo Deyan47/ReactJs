@@ -1,9 +1,15 @@
 import style from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import React, { useEffect } from "react";
 
 const Header = () => {
   const { getUserData } = useAuth();
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <header className={style.header}>
       <Link to="/">
@@ -34,9 +40,7 @@ const Header = () => {
                     Create
                   </Link>
                 </li>
-              ) : (
-                ""
-              )}
+              ) : null}
 
               <li className={style.li}>
                 <Link
@@ -57,9 +61,7 @@ const Header = () => {
                     Dashboard
                   </Link>
                 </li>
-              ) : (
-                ""
-              )}
+              ) : null}
 
               <div className={style.IsLogged}>
                 <Link
