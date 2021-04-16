@@ -18,6 +18,7 @@ export default function Login() {
       setLoading(true);
       setError("");
       await login(emailRef.current.value, passwordRef.current.value);
+      await history.push("/");
       window.location.reload(false);
     } catch {
       setError("Failed to log in");
