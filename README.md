@@ -2,8 +2,12 @@
 
 Job-Hunter Project
 
+How to run:
 cd client
 npm start
+
+Users can search for their dream job and they can save them to dashboard.
+
 
 Using Firebase/Firestore to store data and Firebase Authenticaion
 
@@ -28,3 +32,6 @@ If logged in as normal user can add to Dashboard/saved offers.
 Dashboard-Show my saved offers.
 MyProfile-
 Can update email and password.
+
+Error handling and data validation ✔️
+Good UI and UX ✔️
