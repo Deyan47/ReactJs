@@ -20,11 +20,16 @@ The Admin can create offers and delete offers.
 
 
 Home-Welcome page.
+
 Create page-Create offer (if admin)
+
 Offers-Shows all offers.
+
 Offer Details-
 Can see the full details of offer.
+
 If logged in as admin can delete offers.
+
 If logged in as normal user can add to Dashboard/saved offers.
 
 Dashboard-Show my saved offers.
