@@ -16,9 +16,7 @@ Guests can only see the start page(HOME) and can login/register.
 Logged in users can view job offers and they can save them to their dashboard.
 Also auth users can view MyProfile.In MyProfile users can update their email and password.
 
-Admin-company@test.com password:asdasd
-
-Admin can create offers and delete offers.
+The Admin can create offers and delete offers.
 
 
 Home-Welcome page.
